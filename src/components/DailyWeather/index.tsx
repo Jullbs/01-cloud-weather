@@ -83,7 +83,7 @@ export function DailyWeather() {
           <p className="mt-4 text-2xl text-lilac-150">°C</p>
         </div>
 
-        {WeatherInfoCard()}
+        <WeatherInfoCard />
       </div>
     </div>
   )

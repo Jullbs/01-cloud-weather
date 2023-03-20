@@ -3,6 +3,7 @@ import { AirQuality } from '@/components/AirQuality'
 import Head from 'next/head'
 import Image from 'next/image'
 import BackgroundImage from 'public/images/background.png'
+import { WeekWeather } from '@/components/WeekWeather'
 
 export default function Home() {
   return (
@@ -15,9 +16,12 @@ export default function Home() {
       </Head>
 
       <main className="relative h-screen w-screen bg-lilac-400 -z-50">
-        <div className="h-screen w-screen flex justify-center items-center gap-8">
+        <div className="h-full w-full flex justify-center items-center gap-8">
           <DailyWeather />
-          <AirQuality />
+          <div className="flex flex-col justify-center items-center gap-6 max-w-[36.125rem] w-full h-full">
+            <AirQuality />
+            <WeekWeather />
+          </div>
         </div>
 
         <Image

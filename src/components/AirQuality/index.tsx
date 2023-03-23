@@ -1,9 +1,9 @@
 export function AirQuality() {
   return (
-    <div className="flex flex-col justify-between items-center bg-lilac-450 font-default font-bold text-lilac-150 rounded-xl p-4 max-w-[17.5rem] max-h-[15.25rem] w-full h-full">
+    <section className="flex flex-col justify-between items-center bg-lilac-450 font-default font-bold text-lilac-150 rounded-xl p-4 max-w-[17.3125rem] max-h-[15.25rem] w-full h-full">
       <div className="flex gap-2 mt-4">
         <span className="icon-[bxs--leaf] w-6 h-6"></span>
-        <p className="text-[1rem]">Qualidade do ar</p>
+        <h2 className="text-[1rem]">Qualidade do ar</h2>
       </div>
       <div className="flex flex-col items-center">
         <p className="text-[1.125rem] text-cyan-300">Boa</p>
@@ -35,6 +35,6 @@ export function AirQuality() {
           <p className="text-[0.75rem] font-normal">CO</p>
         </span>
       </div>
-    </div>
+    </section>
   )
 }

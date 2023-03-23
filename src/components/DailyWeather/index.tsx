@@ -8,7 +8,7 @@ function WeatherInfoCard() {
       <div className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full">
         <span className="icon-[mdi--windy] w-8 h-8 opacity-60 my-auto"></span>
         <div>
-          <p>Vento</p>
+          <h2>Vento</h2>
           <p className="flex items-end gap-1 leading-4 text-sm">
             <strong className="text-lilac-150 text-lg font-bold leading-5">
               17
@@ -20,7 +20,7 @@ function WeatherInfoCard() {
       <div className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full">
         <span className="icon-[material-symbols--humidity-percentage-outline-rounded] w-8 h-8 opacity-60 my-auto"></span>
         <div>
-          <p>Umidade</p>
+          <h2>Umidade</h2>
           <p className="flex items-end gap-1 leading-4 text-sm">
             <strong className="text-lilac-150 text-lg font-bold leading-5">
               31
@@ -32,7 +32,7 @@ function WeatherInfoCard() {
       <div className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full">
         <span className="icon-[wpf--rain] w-8 h-8 opacity-60 my-auto"></span>
         <div>
-          <p>Chuva</p>
+          <h2>Chuva</h2>
           <p className="flex items-end gap-1 leading-4 text-sm">
             <strong className="text-lilac-150 text-lg font-bold leading-5">
               10
@@ -47,7 +47,7 @@ function WeatherInfoCard() {
 
 export function DailyWeather() {
   return (
-    <div className="flex font-default font-bold max-w-120 max-h-120 w-full h-full">
+    <section className="flex font-default font-bold max-w-120 max-h-120 w-full h-full">
       <Image
         src={CloudBackground}
         alt=""
@@ -85,6 +85,6 @@ export function DailyWeather() {
 
         <WeatherInfoCard />
       </div>
-    </div>
+    </section>
   )
 }

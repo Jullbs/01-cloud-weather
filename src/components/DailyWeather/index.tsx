@@ -18,14 +18,13 @@ function WeatherInfoCard() {
         </div>
       </div>
       <div className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full">
-        <span className="icon-[material-symbols--humidity-percentage-outline-rounded] w-8 h-8 opacity-60 my-auto"></span>
+        <span className="icon-[tabler--uv-index] w-8 h-8 opacity-60 my-auto"></span>
         <div>
-          <h2>Umidade</h2>
+          <h2>Índice UV</h2>
           <p className="flex items-end gap-1 leading-4 text-sm">
             <strong className="text-lilac-150 text-lg font-bold leading-5">
               31
-            </strong>{' '}
-            %
+            </strong>
           </p>
         </div>
       </div>

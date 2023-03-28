@@ -14,7 +14,7 @@ export function SunHour() {
           <span className="absolute bg-yellow-300 w-[0.75rem] h-[0.75rem] rounded-[50%] top-1/2 left-1/2 -m-[0.375rem] translate-x-[-6.75rem]"></span>
         </div>
       </div>
-      <strong className="absolute mt-[7rem]">16:01</strong>
+      <strong className="absolute mt-[7.5rem] text-[0.875rem]">16:01</strong>
       <Image
         src={SunHourChart}
         alt=""

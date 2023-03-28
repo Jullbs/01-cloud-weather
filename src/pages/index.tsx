@@ -16,8 +16,29 @@ interface LocationData {
   long: number
 }
 
+export interface WeatherData {
+  currentWeather: {
+    averageTemperature: number
+    maxTemperature: number
+    minTemperature: number
+    weatherCode: number
+    windSpeed: number
+    uvIndex: number
+    precipitationProbability: number
+    sunrise: string
+    sunset: string
+  }
+  weekData: {
+    maxTemperatures: number[]
+    minTemperatures: number[]
+    weatherCodes: number[]
+  }
+}
+
 export default function Home() {
-  const [weatherData, setWeatherData] = useState({})
+  const [weatherData, setWeatherData] = useState<WeatherData | undefined>(
+    undefined,
+  )
 
   async function getWeatherData(location: LocationData) {
     const weatherInfo = await getWeatherInfo(location)
@@ -38,35 +59,39 @@ export default function Home() {
     getLocation(setPosition)
   }, [])
 
-  return (
-    <div>
-      <Head>
-        <title>Cloud Weather</title>
-        <meta name="description" content="Weather page." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  console.log(weatherData)
 
-      <ToastContainer />
-      <main className="relative h-screen w-screen bg-lilac-400 -z-50">
-        <div className="h-full w-full flex justify-center items-center gap-8">
-          <DailyWeather />
-          <div className="flex flex-wrap justify-center content-center gap-6 max-w-[36.125rem] w-full h-full">
-            <AirQuality />
-            <SunHour />
-            <WeekWeather />
+  if (weatherData) {
+    return (
+      <div>
+        <Head>
+          <title>Cloud Weather</title>
+          <meta name="description" content="Weather page." />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+
+        <ToastContainer />
+        <main className="relative h-screen w-screen bg-lilac-400 -z-50">
+          <div className="h-full w-full flex justify-center items-center gap-8">
+            <DailyWeather currentWeatherData={weatherData.currentWeather} />
+            <div className="flex flex-wrap justify-center content-center gap-6 max-w-[36.125rem] w-full h-full">
+              <AirQuality />
+              <SunHour />
+              <WeekWeather weekData={weatherData.weekData} />
+            </div>
           </div>
-        </div>
 
-        <Image
-          src={BackgroundImage}
-          alt=""
-          width={1366}
-          height={768}
-          className="absolute rounded-2xl -z-40 inset-0 m-auto object-contain"
-          priority
-        />
-      </main>
-    </div>
-  )
+          <Image
+            src={BackgroundImage}
+            alt=""
+            width={1366}
+            height={768}
+            className="absolute rounded-2xl -z-40 inset-0 m-auto object-contain"
+            priority
+          />
+        </main>
+      </div>
+    )
+  }
 }

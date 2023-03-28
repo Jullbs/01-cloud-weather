@@ -1,8 +1,22 @@
+import { getWeatherIcon } from '@/util/getWeatherIcon'
 import Image from 'next/image'
 import CloudBackground from 'public/images/cloud-background.png'
-import CloudIcon from '@/assets/cloud-icon.svg'
 
-function WeatherInfoCard() {
+interface DailyWeatherProps {
+  currentWeatherData: {
+    averageTemperature: number
+    maxTemperature: number
+    minTemperature: number
+    weatherCode: number
+    windSpeed: number
+    uvIndex: number
+    precipitationProbability: number
+    sunrise: string
+    sunset: string
+  }
+}
+
+function WeatherInfoCard({ currentWeatherData }: DailyWeatherProps) {
   return (
     <div className="flex justify-between text-lilac-100 gap-2 font-normal text-xs w-full">
       <div className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full">
@@ -11,7 +25,7 @@ function WeatherInfoCard() {
           <h2>Vento</h2>
           <p className="flex items-end gap-1 leading-4 text-sm">
             <strong className="text-lilac-150 text-lg font-bold leading-5">
-              17
+              {Math.round(currentWeatherData.windSpeed)}
             </strong>{' '}
             km/h
           </p>
@@ -23,7 +37,7 @@ function WeatherInfoCard() {
           <h2>Índice UV</h2>
           <p className="flex items-end gap-1 leading-4 text-sm">
             <strong className="text-lilac-150 text-lg font-bold leading-5">
-              31
+              {Math.round(currentWeatherData.uvIndex)}
             </strong>
           </p>
         </div>
@@ -34,7 +48,7 @@ function WeatherInfoCard() {
           <h2>Chuva</h2>
           <p className="flex items-end gap-1 leading-4 text-sm">
             <strong className="text-lilac-150 text-lg font-bold leading-5">
-              10
+              {Math.round(currentWeatherData.precipitationProbability)}
             </strong>{' '}
             %
           </p>
@@ -44,7 +58,7 @@ function WeatherInfoCard() {
   )
 }
 
-export function DailyWeather() {
+export function DailyWeather({ currentWeatherData }: DailyWeatherProps) {
   return (
     <section className="flex font-default font-bold max-w-120 max-h-120 w-full h-full">
       <Image
@@ -57,7 +71,7 @@ export function DailyWeather() {
       />
 
       <Image
-        src={CloudIcon}
+        src={getWeatherIcon(currentWeatherData.weatherCode)}
         alt=""
         width="176"
         height="176"
@@ -73,16 +87,19 @@ export function DailyWeather() {
         <div className="flex gap-1 mb-24 ml-4">
           <span>
             <strong className="text-[5.5rem] text-white leading-[6.625rem]">
-              18
+              {Math.round(currentWeatherData.averageTemperature)}
             </strong>
             <div className="flex justify-center items-center gap-1 text-xl text-lilac-200">
-              <strong className="text-white">22°</strong> 16°
+              <strong className="text-white">
+                {Math.round(currentWeatherData.maxTemperature)}°
+              </strong>{' '}
+              {Math.round(currentWeatherData.minTemperature)}°
             </div>
           </span>
           <p className="mt-4 text-2xl text-lilac-150">°C</p>
         </div>
 
-        <WeatherInfoCard />
+        <WeatherInfoCard currentWeatherData={currentWeatherData} />
       </div>
     </section>
   )

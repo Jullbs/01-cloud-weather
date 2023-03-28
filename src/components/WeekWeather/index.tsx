@@ -5,7 +5,15 @@ import RainCloud from '@/assets/rain-cloud.svg'
 import ThunderCloud from '@/assets/thunder-cloud.svg'
 import SunBetweenClouds from '@/assets/sun-between-clouds.svg'
 
-export function WeekWeather() {
+interface WeekWeatherProps {
+  weekData: {
+    maxTemperatures: number[]
+    minTemperatures: number[]
+    weatherCodes: number[]
+  }
+}
+
+export function WeekWeather({ weekData }: WeekWeatherProps) {
   return (
     <section className="flex gap-3 bg-lilac-450 font-default font-bold text-lilac-150 rounded-xl p-10 max-w-[36.125rem] max-h-[13.25rem] w-full h-full">
       <span className="flex flex-col justify-between items-center max-w-[5.625rem] w-full">

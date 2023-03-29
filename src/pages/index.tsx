@@ -72,7 +72,7 @@ export default function Home() {
         </Head>
 
         <ToastContainer />
-        <main className="relative h-screen w-screen bg-lilac-400 -z-50">
+        <main className="relative h-screen w-screen bg-lilac-400 -z-50 antialiased">
           <div className="h-full w-full flex justify-center items-center gap-8">
             <DailyWeather currentWeatherData={weatherData.currentWeather} />
             <div className="flex flex-wrap justify-center content-center gap-6 max-w-[36.125rem] w-full h-full">

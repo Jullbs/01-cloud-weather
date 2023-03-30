@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import SunHourChart from '@/assets/sun-hour-chart.svg'
-import moment from 'moment'
+import { getTimeInSeconds } from '@/util/getTimeInSeconds'
+import { format, parseISO } from 'date-fns'
 
 interface SunHourProps {
   currentWeatherData: {
@@ -9,18 +10,10 @@ interface SunHourProps {
   }
 }
 
-function getTimeInSeconds(time?: string) {
-  if (time) {
-    return moment.duration(moment(time).format('LTS')).asSeconds()
-  } else {
-    return moment.duration(moment().format('LTS')).asSeconds()
-  }
-}
-
 export function SunHour({ currentWeatherData }: SunHourProps) {
   const sunriseInSeconds = getTimeInSeconds(currentWeatherData.sunrise)
   const sunsetInSeconds = getTimeInSeconds(currentWeatherData.sunset)
-  const realTimeInSeconds = getTimeInSeconds(moment().format())
+  const realTimeInSeconds = getTimeInSeconds()
 
   function getHourIcon() {
     if (
@@ -75,12 +68,12 @@ export function SunHour({ currentWeatherData }: SunHourProps) {
         </div>
       </div>
       <strong className="absolute mt-[7.5rem] text-[0.875rem]">
-        {moment().format('LT')}
+        {format(new Date(), 'p')}
       </strong>
 
       <div className="w-[15rem] flex justify-between font-normal text-[0.75rem] mt-[-1rem] leading-[0.875rem]">
-        <p>{moment(currentWeatherData.sunrise).format('LT')}</p>
-        <p>{moment(currentWeatherData.sunset).format('LT')}</p>
+        <p>{format(parseISO(currentWeatherData.sunrise), 'p')}</p>
+        <p>{format(parseISO(currentWeatherData.sunset), 'p')}</p>
       </div>
     </section>
   )

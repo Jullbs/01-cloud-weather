@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import { getWeatherIcon } from '@/util/getWeatherIcon'
-import moment from 'moment'
-import 'moment/locale/pt-BR'
+import add from 'date-fns/add'
+import format from 'date-fns/format'
+import { ptBR } from 'date-fns/locale'
 
 interface WeekWeatherProps {
   weekData: {
@@ -21,7 +22,15 @@ export function WeekWeather({ weekData }: WeekWeatherProps) {
         key={i}
       >
         <h2 className="text-[0.8125rem] capitalize">
-          {moment().locale('pt-BR').add(i, 'days').format('dddd')}
+          {format(
+            add(new Date(), {
+              days: i,
+            }),
+            'EEEE',
+            {
+              locale: ptBR,
+            },
+          )}
         </h2>
         <Image
           src={getWeatherIcon(weekData.weatherCodes[i])}

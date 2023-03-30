@@ -21,6 +21,7 @@ export function SunHour({ currentWeatherData }: SunHourProps) {
   const sunriseInSeconds = getTimeInSeconds(currentWeatherData.sunrise)
   const sunsetInSeconds = getTimeInSeconds(currentWeatherData.sunset)
   const realTimeInSeconds = getTimeInSeconds(moment().format())
+  // const realTimeInSeconds = getTimeInSeconds('2023-03-30T20:44')
 
   function getHourIcon() {
     if (

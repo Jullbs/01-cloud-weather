@@ -10,6 +10,8 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import getLocation from '@/services/getLocation'
 import { getWeatherInfo } from '@/services/getWeatherInfo'
+import { getAirInfo } from '@/services/getAirInfo'
+import { getGoogleInfo } from '@/services/getGoogleInfo'
 
 interface LocationData {
   lat: number
@@ -35,15 +37,31 @@ export interface WeatherData {
   }
 }
 
+export interface AirData {
+  aqi: number
+  components: {
+    PM2_5: number
+    PM10: number
+    SO2: number
+    NO2: number
+    O3: number
+    CO: number
+  }
+}
+
 export default function Home() {
   const [weatherData, setWeatherData] = useState<WeatherData | undefined>(
     undefined,
   )
+  const [airData, setAirData] = useState<AirData | undefined>(undefined)
 
   async function getWeatherData(location: LocationData) {
     const weatherInfo = await getWeatherInfo(location)
+    const airInfo = await getAirInfo(location)
+    getGoogleInfo(location)
 
     setWeatherData(weatherInfo)
+    setAirData(airInfo)
   }
 
   function setPosition(position: any) {
@@ -58,8 +76,6 @@ export default function Home() {
   useEffect(() => {
     getLocation(setPosition)
   }, [])
-
-  console.log(weatherData)
 
   if (weatherData) {
     return (
@@ -76,7 +92,7 @@ export default function Home() {
           <div className="h-full w-full flex justify-center items-center gap-8">
             <DailyWeather currentWeatherData={weatherData.currentWeather} />
             <div className="flex flex-wrap justify-center content-center gap-6 max-w-[36.125rem] w-full h-full">
-              <AirQuality />
+              {airData && <AirQuality airData={airData} />}
               <SunHour currentWeatherData={weatherData.currentWeather} />
               <WeekWeather weekData={weatherData.weekData} />
             </div>

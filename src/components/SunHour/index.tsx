@@ -20,7 +20,7 @@ function getTimeInSeconds(time?: string) {
 export function SunHour({ currentWeatherData }: SunHourProps) {
   const sunriseInSeconds = getTimeInSeconds(currentWeatherData.sunrise)
   const sunsetInSeconds = getTimeInSeconds(currentWeatherData.sunset)
-  const realTimeInSeconds = getTimeInSeconds(moment().format('LTS'))
+  const realTimeInSeconds = getTimeInSeconds(moment().format())
 
   function getHourIcon() {
     if (
@@ -28,7 +28,7 @@ export function SunHour({ currentWeatherData }: SunHourProps) {
       realTimeInSeconds < sunriseInSeconds
     ) {
       return (
-        <span className="absolute z-[10] bg-blue-500 icon-[ri--moon-clear-fill] w-[1.5rem] h-[1.5rem] top-1/2 left-1/2 -m-[0.95rem] translate-x-[6.95rem]"></span>
+        <span className="absolute z-[10] bg-cyan-300 icon-[ri--moon-clear-fill] w-[1.5rem] h-[1.5rem] top-1/2 left-1/2 -m-[0.95rem] translate-x-[6.95rem]"></span>
       )
     } else {
       return (
@@ -72,7 +72,6 @@ export function SunHour({ currentWeatherData }: SunHourProps) {
           style={{ transform: `rotate(${getSunPosition()}deg)` }}
         >
           {getHourIcon()}
-          {/* <span className="absolute bg-yellow-300 icon-[ph--sun-dim-fill] w-[1.5rem] h-[1.5rem] top-1/2 left-1/2 -m-[0.75rem] translate-x-[-6.75rem]"></span> */}
         </div>
       </div>
       <strong className="absolute mt-[7.5rem] text-[0.875rem]">

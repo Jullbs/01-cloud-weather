@@ -2,21 +2,28 @@ import { getWeatherIcon } from '@/util/getWeatherIcon'
 import Image from 'next/image'
 import CloudBackground from 'public/images/cloud-background.png'
 
-interface DailyWeatherProps {
-  currentWeatherData: {
-    averageTemperature: number
-    maxTemperature: number
-    minTemperature: number
-    weatherCode: number
-    windSpeed: number
-    uvIndex: number
-    precipitationProbability: number
-    sunrise: string
-    sunset: string
-  }
+interface CurrentWeatherData {
+  averageTemperature: number
+  maxTemperature: number
+  minTemperature: number
+  weatherCode: number
+  windSpeed: number
+  uvIndex: number
+  precipitationProbability: number
+  sunrise: string
+  sunset: string
 }
 
-function WeatherInfoCard({ currentWeatherData }: DailyWeatherProps) {
+interface WeatherInfoCardProps {
+  currentWeatherData: CurrentWeatherData
+}
+
+interface DailyWeatherProps {
+  currentWeatherData: CurrentWeatherData
+  cityState: string | undefined
+}
+
+function WeatherInfoCard({ currentWeatherData }: WeatherInfoCardProps) {
   return (
     <div className="flex justify-between text-lilac-100 gap-2 font-normal text-xs w-full">
       <div className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full">
@@ -58,7 +65,10 @@ function WeatherInfoCard({ currentWeatherData }: DailyWeatherProps) {
   )
 }
 
-export function DailyWeather({ currentWeatherData }: DailyWeatherProps) {
+export function DailyWeather({
+  currentWeatherData,
+  cityState,
+}: DailyWeatherProps) {
   return (
     <section className="flex font-default font-bold max-w-120 max-h-120 w-full h-full">
       <Image
@@ -81,7 +91,7 @@ export function DailyWeather({ currentWeatherData }: DailyWeatherProps) {
       <div className="relative flex flex-col justify-between items-center p-3 shrink flex-wrap w-full">
         <div className="flex justify-end pt-5 pr-5 gap-1 shrink w-full">
           <span className="icon-[material-symbols--pin-drop-rounded] bg-lilac-300 w-5 h-5"></span>
-          <p className="text-lilac-200 text-sm">Vitória, ES</p>
+          <p className="text-lilac-200 text-sm">{cityState && cityState}</p>
         </div>
 
         <div className="flex gap-1 mb-24 ml-4">

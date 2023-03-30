@@ -54,14 +54,16 @@ export default function Home() {
     undefined,
   )
   const [airData, setAirData] = useState<AirData | undefined>(undefined)
+  const [cityState, setCityState] = useState<string | undefined>(undefined)
 
   async function getWeatherData(location: LocationData) {
     const weatherInfo = await getWeatherInfo(location)
     const airInfo = await getAirInfo(location)
-    getGoogleInfo(location)
+    const cityStateInfo = await getGoogleInfo(location)
 
     setWeatherData(weatherInfo)
     setAirData(airInfo)
+    setCityState(cityStateInfo)
   }
 
   function setPosition(position: any) {
@@ -90,7 +92,10 @@ export default function Home() {
         <ToastContainer />
         <main className="relative h-screen w-screen bg-lilac-400 -z-50 antialiased">
           <div className="h-full w-full flex justify-center items-center gap-8">
-            <DailyWeather currentWeatherData={weatherData.currentWeather} />
+            <DailyWeather
+              currentWeatherData={weatherData.currentWeather}
+              cityState={cityState}
+            />
             <div className="flex flex-wrap justify-center content-center gap-6 max-w-[36.125rem] w-full h-full">
               {airData && <AirQuality airData={airData} />}
               <SunHour currentWeatherData={weatherData.currentWeather} />

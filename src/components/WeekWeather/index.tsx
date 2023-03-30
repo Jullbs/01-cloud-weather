@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { getWeatherIcon } from '@/util/getWeatherIcon'
 import moment from 'moment'
-require('moment/locale/pt-BR')
+import 'moment/locale/pt-BR'
 
 interface WeekWeatherProps {
   weekData: {

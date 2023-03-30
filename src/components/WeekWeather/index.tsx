@@ -40,7 +40,7 @@ export function WeekWeather({ weekData }: WeekWeatherProps) {
   }
 
   return (
-    <section className="flex bg-lilac-450 font-default font-bold text-lilac-150 rounded-xl px-8 py-10 max-w-[36.125rem] max-h-[13.25rem] w-full h-full">
+    <section className="flex flex-row flex-wrap sm:flex-nowrap bg-lilac-450 font-default font-bold text-lilac-150 rounded-xl px-8 py-10 max-w-[36.125rem] sm:max-h-[13.25rem] w-full h-full">
       {weekDaysContent}
     </section>
   )

@@ -25,7 +25,7 @@ interface DailyWeatherProps {
 
 function WeatherInfoCard({ currentWeatherData }: WeatherInfoCardProps) {
   return (
-    <div className="flex justify-between text-lilac-100 gap-2 font-normal text-xs w-full">
+    <div className="flex sm:flex-row flex-wrap sm:flex-nowrap justify-center text-lilac-100 gap-2 font-normal text-xs w-full">
       <div className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full">
         <span className="icon-[mdi--windy] w-8 h-8 opacity-60 my-auto"></span>
         <div>
@@ -70,7 +70,7 @@ export function DailyWeather({
   cityState,
 }: DailyWeatherProps) {
   return (
-    <section className="flex font-default font-bold max-w-120 max-h-120 w-full h-full">
+    <section className="flex font-default font-bold max-w-[30rem] h-[30rem] w-full">
       <Image
         src={CloudBackground}
         alt=""
@@ -85,18 +85,18 @@ export function DailyWeather({
         alt=""
         width="176"
         height="176"
-        className="absolute -mt-14 -ml-14"
+        className="absolute sm:-mt-14 sm:-ml-14"
       />
 
-      <div className="relative flex flex-col justify-between items-center p-3 shrink flex-wrap w-full">
+      <div className="relative flex flex-col gap-6 sm:gap-16 items-center p-3 shrink flex-wrap w-full">
         <div className="flex justify-end pt-5 pr-5 gap-1 shrink w-full">
           <span className="icon-[material-symbols--pin-drop-rounded] bg-lilac-300 w-5 h-5"></span>
           <p className="text-lilac-200 text-sm">{cityState && cityState}</p>
         </div>
 
-        <div className="flex gap-1 mb-24 ml-4">
-          <span>
-            <strong className="text-[5.5rem] text-white leading-[6.625rem]">
+        <div className="flex shrink gap-1 sm:mb-20 ml-4">
+          <span className="flex flex-col shrink">
+            <strong className="text-[4rem] sm:text-[5.5rem] text-white leading-[6.625rem]">
               {Math.round(currentWeatherData.averageTemperature)}
             </strong>
             <div className="flex justify-center items-center gap-1 text-xl text-lilac-200">
@@ -106,7 +106,7 @@ export function DailyWeather({
               {Math.round(currentWeatherData.minTemperature)}°
             </div>
           </span>
-          <p className="mt-4 text-2xl text-lilac-150">°C</p>
+          <p className="mt-4 text-[2rem] sm:text-2xl text-lilac-150">°C</p>
         </div>
 
         <WeatherInfoCard currentWeatherData={currentWeatherData} />

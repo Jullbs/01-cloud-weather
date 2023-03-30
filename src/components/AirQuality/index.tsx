@@ -21,7 +21,7 @@ export function AirQuality({ airData }: AirQualityProps) {
   }
 
   return (
-    <section className="flex flex-col justify-between items-center bg-lilac-450 font-default font-bold text-lilac-150 rounded-xl p-4 max-w-[17.3125rem] max-h-[15.25rem] w-full h-full">
+    <section className="flex flex-col gap-7 justify-between items-center bg-lilac-450 font-default font-bold text-lilac-150 rounded-xl p-4 max-w-[17.3125rem] max-h-[15.25rem] w-full h-full">
       <div className="flex gap-2 mt-4">
         <span className="icon-[bxs--leaf] w-6 h-6"></span>
         <h2 className="text-[1rem]">Qualidade do ar</h2>

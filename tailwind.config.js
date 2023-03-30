@@ -12,7 +12,8 @@ module.exports = {
         'lilac-400': '#8E87FA',
         'lilac-450': '#6D67D0',
         'lilac-500': '#6660C8',
-        'light-pink-200': '#F7C8FF'
+        'light-pink-200': '#F7C8FF',
+        'purple-500': '#292752',
       },
       colors: {
         'lilac-100': '#E7E6FB',

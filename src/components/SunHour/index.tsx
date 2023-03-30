@@ -21,7 +21,6 @@ export function SunHour({ currentWeatherData }: SunHourProps) {
   const sunriseInSeconds = getTimeInSeconds(currentWeatherData.sunrise)
   const sunsetInSeconds = getTimeInSeconds(currentWeatherData.sunset)
   const realTimeInSeconds = getTimeInSeconds(moment().format())
-  // const realTimeInSeconds = getTimeInSeconds('2023-03-30T20:44')
 
   function getHourIcon() {
     if (
@@ -29,7 +28,7 @@ export function SunHour({ currentWeatherData }: SunHourProps) {
       realTimeInSeconds < sunriseInSeconds
     ) {
       return (
-        <span className="absolute z-[10] bg-cyan-300 icon-[ri--moon-clear-fill] w-[1.5rem] h-[1.5rem] top-1/2 left-1/2 -m-[0.95rem] translate-x-[6.95rem]"></span>
+        <span className="absolute z-[10] bg-purple-500 icon-[ri--moon-clear-fill] w-[1.5rem] h-[1.5rem] top-1/2 left-1/2 -m-[0.95rem] translate-x-[6.95rem]"></span>
       )
     } else {
       return (
@@ -54,7 +53,7 @@ export function SunHour({ currentWeatherData }: SunHourProps) {
   }
 
   return (
-    <section className="flex flex-col gap-6 pt-8 items-center bg-lilac-450 font-default font-bold text-lilac-150 rounded-xl max-w-[17.3125rem] max-h-[15.25rem] w-full h-full">
+    <section className="flex flex-col gap-6 pt-8 pb-3 items-center bg-lilac-450 font-default font-bold text-lilac-150 rounded-xl max-w-[17.3125rem] max-h-[15.25rem] w-full h-full">
       <div className="flex gap-2">
         <span className="icon-[mdi--sun-clock] w-6 h-6"></span>
         <h2>Horário do Sol</h2>

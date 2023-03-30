@@ -16,7 +16,10 @@ export function WeekWeather({ weekData }: WeekWeatherProps) {
 
   for (let i = 1; i < 7; i++) {
     weekDaysContent.push(
-      <span className="flex flex-col justify-between items-center max-w-[5.625rem] w-full">
+      <span
+        className="flex flex-col justify-between items-center max-w-[5.625rem] w-full"
+        key={i}
+      >
         <h2 className="text-[0.8125rem] capitalize">
           {moment().locale('pt-BR').add(i, 'days').format('dddd')}
         </h2>

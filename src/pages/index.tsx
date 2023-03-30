@@ -77,7 +77,7 @@ export default function Home() {
             <DailyWeather currentWeatherData={weatherData.currentWeather} />
             <div className="flex flex-wrap justify-center content-center gap-6 max-w-[36.125rem] w-full h-full">
               <AirQuality />
-              <SunHour />
+              <SunHour currentWeatherData={weatherData.currentWeather} />
               <WeekWeather weekData={weatherData.weekData} />
             </div>
           </div>

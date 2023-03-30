@@ -20,6 +20,7 @@ module.exports = {
         'lilac-200': '#C2BFF4',
         'cyan-300': '#87EBCD',
         'yellow-300': '#F6C833',
+        'blue-500': '#153c75',
       },
       fontFamily: {
         'default': 'Lato',

@@ -7,7 +7,7 @@ interface GetAirInfoProps {
 
 export async function getAirInfo({ lat, long }: GetAirInfoProps) {
   const data = await axios.get(
-    `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${long}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`,
+    `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${long}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`,
   )
 
   const airDataOrganized = {

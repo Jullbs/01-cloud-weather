@@ -70,14 +70,14 @@ export function DailyWeather({
   cityState,
 }: DailyWeatherProps) {
   return (
-    <section className="flex font-default font-bold max-w-[30rem] h-[30rem] w-full">
+    <section className="flex font-default font-bold max-w-[30rem] max-h-[30rem] w-full h-full">
       <Image
         src={CloudBackground}
         alt=""
         width="480"
         height="480"
         quality={100}
-        className="absolute rounded-xl -z-10"
+        className="absolute rounded-xl -z-10 w-[30rem] h-[25rem] sm:w-[30rem] sm:h-[30rem]"
       />
 
       <Image
@@ -85,10 +85,10 @@ export function DailyWeather({
         alt=""
         width="176"
         height="176"
-        className="absolute sm:-mt-14 sm:-ml-14"
+        className="absolute opacity-50 sm:opacity-100 sm:-mt-14 sm:-ml-14"
       />
 
-      <div className="relative flex flex-col gap-6 sm:gap-16 items-center p-3 shrink flex-wrap w-full">
+      <div className="relative flex flex-col gap-6 sm:gap-16 justify-between items-center p-3 shrink flex-wrap w-full">
         <div className="flex justify-end pt-5 pr-5 gap-1 shrink w-full">
           <span className="icon-[material-symbols--pin-drop-rounded] bg-lilac-300 w-5 h-5"></span>
           <p className="text-lilac-200 text-sm">{cityState && cityState}</p>

@@ -16,23 +16,41 @@ function WeatherInfoCard({ currentWeatherData }: WeatherInfoCardProps) {
   const cardInfo = [
     {
       title: 'Vento',
-      icon: '[mdi--windy]',
       value: Math.round(currentWeatherData.windSpeed),
       unitMeasure: 'km/h',
     },
     {
       title: 'Índice UV',
-      icon: '[tabler--uv-index]',
       value: Math.round(currentWeatherData.uvIndex),
       unitMeasure: '',
     },
     {
       title: 'Chuva',
-      icon: '[wpf--rain]',
       value: Math.round(currentWeatherData.precipitationProbability),
       unitMeasure: '%',
     },
   ]
+
+  function getInfoIcon(title: string) {
+    switch (title) {
+      case 'Vento':
+        return (
+          <span className="icon-[mdi--windy] w-8 h-8 opacity-60 my-auto"></span>
+        )
+      case 'Índice UV':
+        return (
+          <span className="icon-[tabler--uv-index] w-8 h-8 opacity-60 my-auto"></span>
+        )
+      case 'Chuva':
+        return (
+          <span className="icon-[wpf--rain] w-8 h-8 opacity-60 my-auto"></span>
+        )
+      default:
+        return (
+          <span className="icon-[mdi--windy] w-8 h-8 opacity-60 my-auto"></span>
+        )
+    }
+  }
 
   return (
     <div className="flex sm:flex-row flex-wrap sm:flex-nowrap justify-center text-lilac-100 gap-2 font-normal text-xs w-full">
@@ -42,9 +60,7 @@ function WeatherInfoCard({ currentWeatherData }: WeatherInfoCardProps) {
             className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full"
             key={item.title}
           >
-            <span
-              className={`icon-${item.icon} w-8 h-8 opacity-60 my-auto`}
-            ></span>
+            {getInfoIcon(item.title)}
             <div>
               <h2>{item.title}</h2>
               <p className="flex items-end gap-1 leading-4 text-sm">

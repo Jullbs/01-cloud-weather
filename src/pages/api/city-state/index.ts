@@ -13,6 +13,11 @@ export default async function handler(
 
   const data = await axios.get(
     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${process.env.GOOGLE_API_SECRET_KEY}`,
+    {
+      params: {
+        language: 'pt-BR',
+      },
+    },
   )
 
   const adress = data.data.plus_code.compound_code

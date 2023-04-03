@@ -3,17 +3,26 @@ import { getWeatherIcon } from '@/util/getWeatherIcon'
 import add from 'date-fns/add'
 import format from 'date-fns/format'
 import { ptBR } from 'date-fns/locale'
+import { WeekWeatherData } from '@/types'
 
 interface WeekWeatherProps {
-  weekData: {
-    maxTemperatures: number[]
-    minTemperatures: number[]
-    weatherCodes: number[]
-  }
+  weekWeather: WeekWeatherData
 }
 
-export function WeekWeather({ weekData }: WeekWeatherProps) {
+export function WeekWeather({ weekWeather }: WeekWeatherProps) {
   const weekDaysContent = []
+
+  function getWeekDays(i: number) {
+    return format(
+      add(new Date(), {
+        days: i,
+      }),
+      'EEEE',
+      {
+        locale: ptBR,
+      },
+    )
+  }
 
   for (let i = 1; i < 7; i++) {
     weekDaysContent.push(
@@ -21,28 +30,18 @@ export function WeekWeather({ weekData }: WeekWeatherProps) {
         className="flex flex-col justify-between items-center max-w-[5.625rem] w-full"
         key={i}
       >
-        <h2 className="text-[0.8125rem] capitalize">
-          {format(
-            add(new Date(), {
-              days: i,
-            }),
-            'EEEE',
-            {
-              locale: ptBR,
-            },
-          )}
-        </h2>
+        <h2 className="text-[0.8125rem] capitalize">{getWeekDays(i)}</h2>
         <Image
-          src={getWeatherIcon(weekData.weatherCodes[i])}
+          src={getWeatherIcon(weekWeather.weatherCodes[i])}
           alt=""
           width="64"
           height="64"
         />
         <p className="flex gap-1 text-lilac-200">
           <strong className="text-white">
-            {Math.round(weekData.maxTemperatures[i])}°{' '}
+            {Math.round(weekWeather.maxTemperatures[i])}°{' '}
           </strong>
-          {Math.round(weekData.minTemperatures[i])}°
+          {Math.round(weekWeather.minTemperatures[i])}°
         </p>
       </span>,
     )

@@ -6,48 +6,14 @@ import BackgroundImage from 'public/images/background.png'
 import { WeekWeather } from '@/components/WeekWeather'
 import { SunHour } from '@/components/SunHour'
 import { useEffect, useState } from 'react'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import getLocation from '@/services/getLocation'
 import { getWeatherInfo } from '@/services/getWeatherInfo'
 import { getAirInfo } from '@/services/getAirInfo'
 import { getGoogleInfo } from '@/services/getGoogleInfo'
-
-interface LocationData {
-  lat: number
-  long: number
-}
-
-export interface WeatherData {
-  currentWeather: {
-    averageTemperature: number
-    maxTemperature: number
-    minTemperature: number
-    weatherCode: number
-    windSpeed: number
-    uvIndex: number
-    precipitationProbability: number
-    sunrise: string
-    sunset: string
-  }
-  weekData: {
-    maxTemperatures: number[]
-    minTemperatures: number[]
-    weatherCodes: number[]
-  }
-}
-
-export interface AirData {
-  aqi: number
-  components: {
-    PM2_5: number
-    PM10: number
-    SO2: number
-    NO2: number
-    O3: number
-    CO: number
-  }
-}
+import { AirData, LocationData, WeatherData } from '@/types'
+import Loading from '@/components/Loading'
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState<WeatherData | undefined>(
@@ -66,7 +32,8 @@ export default function Home() {
     setCityState(cityStateInfo)
   }
 
-  function setPosition(position: any) {
+  // eslint-disable-next-line no-undef
+  const setPosition: PositionCallback = (position) => {
     const location = {
       lat: position.coords.latitude,
       long: position.coords.longitude,
@@ -75,8 +42,31 @@ export default function Home() {
     getWeatherData(location)
   }
 
+  // eslint-disable-next-line no-undef
+  const showError: PositionErrorCallback = (error) => {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        toast.warn(
+          'O usuário recusou o pedido do Geolocation, favor ir nas configurações de seu navegador e alterar.',
+        )
+        break
+      case error.POSITION_UNAVAILABLE:
+        toast.warn('A informação sobre localização está indisponível.')
+        break
+      case error.TIMEOUT:
+        toast.warn(
+          'A solicitação para autorizar a localização expirou, favor atualizar a página.',
+        )
+        break
+    }
+  }
+
+  const locationNotCompatibleWithBrowser = () => {
+    toast.error('Geolocation não é compatível com esse navegador.')
+  }
+
   useEffect(() => {
-    getLocation(setPosition)
+    getLocation({ setPosition, showError, locationNotCompatibleWithBrowser })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -101,32 +91,11 @@ export default function Home() {
               <div className="flex flex-wrap justify-center content-center gap-6 lg:max-w-[36.125rem] w-full h-full">
                 {airData && <AirQuality airData={airData} />}
                 <SunHour currentWeatherData={weatherData.currentWeather} />
-                <WeekWeather weekData={weatherData.weekData} />
+                <WeekWeather weekWeather={weatherData.weekWeather} />
               </div>
             </>
           ) : (
-            <>
-              <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  stroke-width="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
-            </>
+            <Loading />
           )}
         </div>
 

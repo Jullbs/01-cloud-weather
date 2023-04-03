@@ -1,11 +1,7 @@
+import { LocationData } from '@/types'
 import axios from 'axios'
 
-interface GetWeatherInfoProps {
-  lat: number
-  long: number
-}
-
-export async function getWeatherInfo({ lat, long }: GetWeatherInfoProps) {
+export async function getWeatherInfo({ lat, long }: LocationData) {
   const data = await axios.get(
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode,uv_index_max,precipitation_probability_mean,sunrise,sunset`,
     {
@@ -29,7 +25,7 @@ export async function getWeatherInfo({ lat, long }: GetWeatherInfoProps) {
       sunrise: data.data.daily.sunrise[0],
       sunset: data.data.daily.sunset[0],
     },
-    weekData: {
+    weekWeather: {
       maxTemperatures: data.data.daily.temperature_2m_max,
       minTemperatures: data.data.daily.temperature_2m_min,
       weatherCodes: data.data.daily.weathercode,

@@ -1,4 +1,4 @@
-import { AirData } from '@/pages'
+import { AirData } from '@/types'
 
 interface AirQualityProps {
   airData: AirData
@@ -17,6 +17,8 @@ export function AirQuality({ airData }: AirQualityProps) {
         return 'Ruim'
       case 5:
         return 'Muito ruim'
+      default:
+        return 'Desconhecido'
     }
   }
 

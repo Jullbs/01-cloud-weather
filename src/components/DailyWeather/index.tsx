@@ -1,18 +1,7 @@
+import { CurrentWeatherData } from '@/types'
 import { getWeatherIcon } from '@/util/getWeatherIcon'
 import Image from 'next/image'
 import CloudBackground from 'public/images/cloud-background.png'
-
-interface CurrentWeatherData {
-  averageTemperature: number
-  maxTemperature: number
-  minTemperature: number
-  weatherCode: number
-  windSpeed: number
-  uvIndex: number
-  precipitationProbability: number
-  sunrise: string
-  sunset: string
-}
 
 interface WeatherInfoCardProps {
   currentWeatherData: CurrentWeatherData
@@ -24,43 +13,50 @@ interface DailyWeatherProps {
 }
 
 function WeatherInfoCard({ currentWeatherData }: WeatherInfoCardProps) {
+  const cardInfo = [
+    {
+      title: 'Vento',
+      icon: '[mdi--windy]',
+      value: Math.round(currentWeatherData.windSpeed),
+      unitMeasure: 'km/h',
+    },
+    {
+      title: 'Índice UV',
+      icon: '[tabler--uv-index]',
+      value: Math.round(currentWeatherData.uvIndex),
+      unitMeasure: '',
+    },
+    {
+      title: 'Chuva',
+      icon: '[wpf--rain]',
+      value: Math.round(currentWeatherData.precipitationProbability),
+      unitMeasure: '%',
+    },
+  ]
+
   return (
     <div className="flex sm:flex-row flex-wrap sm:flex-nowrap justify-center text-lilac-100 gap-2 font-normal text-xs w-full">
-      <div className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full">
-        <span className="icon-[mdi--windy] w-8 h-8 opacity-60 my-auto"></span>
-        <div>
-          <h2>Vento</h2>
-          <p className="flex items-end gap-1 leading-4 text-sm">
-            <strong className="text-lilac-150 text-lg font-bold leading-5">
-              {Math.round(currentWeatherData.windSpeed)}
-            </strong>{' '}
-            km/h
-          </p>
-        </div>
-      </div>
-      <div className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full">
-        <span className="icon-[tabler--uv-index] w-8 h-8 opacity-60 my-auto"></span>
-        <div>
-          <h2>Índice UV</h2>
-          <p className="flex items-end gap-1 leading-4 text-sm">
-            <strong className="text-lilac-150 text-lg font-bold leading-5">
-              {Math.round(currentWeatherData.uvIndex)}
-            </strong>
-          </p>
-        </div>
-      </div>
-      <div className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full">
-        <span className="icon-[wpf--rain] w-8 h-8 opacity-60 my-auto"></span>
-        <div>
-          <h2>Chuva</h2>
-          <p className="flex items-end gap-1 leading-4 text-sm">
-            <strong className="text-lilac-150 text-lg font-bold leading-5">
-              {Math.round(currentWeatherData.precipitationProbability)}
-            </strong>{' '}
-            %
-          </p>
-        </div>
-      </div>
+      {cardInfo.map((item) => {
+        return (
+          <div
+            className="flex py-3 px-4 bg-lilac-500/60 rounded-md gap-3 max-w-36 max-h-15 w-full h-full"
+            key={item.title}
+          >
+            <span
+              className={`icon-${item.icon} w-8 h-8 opacity-60 my-auto`}
+            ></span>
+            <div>
+              <h2>{item.title}</h2>
+              <p className="flex items-end gap-1 leading-4 text-sm">
+                <strong className="text-lilac-150 text-lg font-bold leading-5">
+                  {Math.round(item.value)}
+                </strong>{' '}
+                {item.unitMeasure}
+              </p>
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }

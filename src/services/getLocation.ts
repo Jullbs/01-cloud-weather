@@ -1,30 +1,19 @@
-import { toast } from 'react-toastify'
+interface GetLocationProps {
+  // eslint-disable-next-line no-undef
+  setPosition: (position: GeolocationPosition) => void
+  // eslint-disable-next-line no-undef
+  showError: (error: GeolocationPositionError) => void
+  locationNotCompatibleWithBrowser: () => void
+}
 
-export default function getLocation(setPosition: (position: any) => void) {
+export default function getLocation({
+  setPosition,
+  showError,
+  locationNotCompatibleWithBrowser,
+}: GetLocationProps) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(setPosition, showError)
   } else {
-    toast.error('Geolocation não é compatível com esse navegador.')
-  }
-
-  function showError(error: any) {
-    switch (error.code) {
-      case error.PERMISSION_DENIED:
-        toast.warn(
-          'O usuário recusou o pedido do Geolocation, favor ir nas configurações de seu navegador e alterar.',
-        )
-        break
-      case error.POSITION_UNAVAILABLE:
-        toast.warn('A informação sobre localização está indisponível.')
-        break
-      case error.TIMEOUT:
-        toast.warn(
-          'A solicitação para autorizar a localização expirou, favor atualizar a página.',
-        )
-        break
-      case error.UNKNOWN_ERROR:
-        toast.warn('Um erro desconhecido ocorreu.')
-        break
-    }
+    locationNotCompatibleWithBrowser()
   }
 }

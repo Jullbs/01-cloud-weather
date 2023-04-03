@@ -7,23 +7,17 @@ import SnowCloud from '@/assets/snow-cloud.svg'
 import ThunderCloud from '@/assets/thunder-cloud.svg'
 
 export function getWeatherIcon(weatherCode: number) {
-  let icon = CloudIcon
-
   switch (weatherCode) {
     case 0:
-      icon = SunIcon
-      break
+      return SunIcon
     case 1:
     case 2:
-      icon = SunBetweenClouds
-      break
+      return SunBetweenClouds
     case 3:
-      icon = CloudIcon
-      break
+      return CloudIcon
     case 45:
     case 48:
-      icon = FogIcon
-      break
+      return FogIcon
     case 51:
     case 53:
     case 55:
@@ -37,22 +31,19 @@ export function getWeatherIcon(weatherCode: number) {
     case 80:
     case 81:
     case 82:
-      icon = RainCloud
-      break
+      return RainCloud
     case 71:
     case 73:
     case 75:
     case 77:
     case 85:
     case 86:
-      icon = SnowCloud
-      break
+      return SnowCloud
     case 95:
     case 96:
     case 99:
-      icon = ThunderCloud
-      break
+      return ThunderCloud
+    default:
+      return CloudIcon
   }
-
-  return icon
 }

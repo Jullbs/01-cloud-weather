@@ -2,12 +2,10 @@ import Image from 'next/image'
 import SunHourChart from '@/assets/sun-hour-chart.svg'
 import { getTimeInSeconds } from '@/util/getTimeInSeconds'
 import { format, parseISO } from 'date-fns'
+import { CurrentWeatherData } from '@/types'
 
 interface SunHourProps {
-  currentWeatherData: {
-    sunrise: string
-    sunset: string
-  }
+  currentWeatherData: Pick<CurrentWeatherData, 'sunrise' | 'sunset'>
 }
 
 export function SunHour({ currentWeatherData }: SunHourProps) {
